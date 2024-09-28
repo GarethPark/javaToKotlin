@@ -11,7 +11,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static com.example.LegsJava.findLongestLegOver;
-public class LongestLegOverTests {
+public class LongestLegOverJavaTests {
     private final List<Leg> legs = List.of(
             leg("one hour", Duration.ofHours(1)),
             leg("one day", Duration.ofDays(1)),
