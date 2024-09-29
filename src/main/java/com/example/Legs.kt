@@ -4,22 +4,15 @@ import java.time.Duration
 import java.util.Optional
 
 object Legs {
-    @JvmStatic
-    fun findLongestLegOver(
-        legs: List<Leg>,
-        duration: Duration
-    ): Optional<Leg> {
-        return Optional.ofNullable(longestLegOver(legs, duration))
+
+    fun List<Leg>.longestOver(duration: Duration): Leg? {
+        val longestLeg = maxByOrNull(Leg:: plannedDuration)
+        return when {
+            longestLeg == null -> null
+            longestLeg.plannedDuration > duration -> longestLeg
+            else -> null
+        }
     }
-
-    fun longestLegOver(
-        legs: List<Leg>,
-        duration: Duration
-        ): Leg? =
-            legs.maxByOrNull(Leg::plannedDuration)?.takeIf { longestLeg ->
-                longestLeg.plannedDuration > duration
-            }
-
 
     private fun Leg.isLongerThan(duration: Duration) =
         plannedDuration > duration
