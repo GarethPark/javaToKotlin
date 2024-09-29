@@ -16,17 +16,13 @@ object Legs {
         legs: List<Leg>,
         duration: Duration
         ): Leg? {
-            var result: Leg? = null
-            for (leg in legs) {
-                if (leg.isLongerThan(duration))
-                    if (result == null ||
-                        leg.isLongerThan(result.plannedDuration)
-                    )
-                        result = leg
-        }
-        return result
+            val longestLeg: Leg? = legs.maxByOrNull(Leg:: plannedDuration)
+            if (longestLeg != null && longestLeg.plannedDuration > duration)
+                return longestLeg
+            else
+                return null
     }
 
     private fun Leg.isLongerThan(duration: Duration) =
-        plannedDuration.compareTo(duration) > 0
+        plannedDuration > duration
 }
